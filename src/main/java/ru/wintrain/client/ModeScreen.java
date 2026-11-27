@@ -28,7 +28,12 @@ public final class ModeScreen extends Screen {
 
     @Override
     public void render(GuiGraphics graphics, int mouseX, int mouseY, float delta) {
-        renderBackground(graphics, mouseX, mouseY, delta);
+        // Do not call renderBackground(): it requests the vanilla blur effect.
+        // FancyMenu may already have applied blur in this frame, causing
+        // "Can only blur once per frame" and crashing the client.
+        // Use a translucent dark overlay instead; it is safe with FancyMenu.
+        graphics.fill(0, 0, width, height, 0xD9080808);
+
         graphics.drawCenteredString(font, Component.literal("WINTRAIN"), width / 2, height / 2 - 62, 0xFFFFFF);
         graphics.drawCenteredString(font, Component.literal("Выбери режим тренировки"), width / 2, height / 2 - 44, 0xB8B8B8);
         super.render(graphics, mouseX, mouseY, delta);
