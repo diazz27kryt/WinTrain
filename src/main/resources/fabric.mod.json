@@ -4,10 +4,19 @@
   "version": "${version}",
   "name": "WinTrain",
   "description": "A Minecraft training companion mod.",
-  "authors": ["diazz27kryt"],
+  "authors": [
+    "diazz27kryt"
+  ],
   "license": "MIT",
   "environment": "*",
-  "entrypoints": { "main": ["ru.wintrain.WinTrain"] },
+  "entrypoints": {
+    "main": [
+      "ru.wintrain.WinTrain"
+    ],
+    "client": [
+      "ru.wintrain.client.WinTrainClient"
+    ]
+  },
   "depends": {
     "fabricloader": ">=0.18.1",
     "minecraft": "~1.21.11",
