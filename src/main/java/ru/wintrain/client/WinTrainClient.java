@@ -7,7 +7,7 @@ import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import org.lwjgl.glfw.GLFW;
 
 public final class WinTrainClient implements ClientModInitializer {
@@ -22,7 +22,7 @@ public final class WinTrainClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
         KeyMapping.Category category = KeyMapping.Category.register(
-                ResourceLocation.fromNamespaceAndPath("wintrain", "main")
+                Identifier.fromNamespaceAndPath("wintrain", "main")
         );
         openMenu = KeyBindingHelper.registerKeyBinding(new KeyMapping(
                 "key.wintrain.open_menu",
