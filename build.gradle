@@ -14,6 +14,16 @@ dependencies {
 processResources {
     inputs.property "version", project.version
     filesMatching("fabric.mod.json") { expand "version": project.version }
+
+    // Decode the committed base64 skin into a real PNG when packaging the mod.
+    doLast {
+        def encodedSkin = new File(destinationDir, "assets/wintrain/textures/entity/wintrain_skin.png.b64")
+        if (encodedSkin.exists()) {
+            def skinPng = new File(encodedSkin.parentFile, "wintrain_skin.png")
+            skinPng.bytes = java.util.Base64.decoder.decode(encodedSkin.text.trim())
+            encodedSkin.delete()
+        }
+    }
 }
 tasks.withType(JavaCompile).configureEach {
     options.release = 21
