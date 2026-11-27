@@ -56,7 +56,7 @@ public final class WinTrainCommands {
             return 0;
         }
 
-        npc.moveTo(spawnX, player.getY(), spawnZ, player.getYRot(), 0.0F);
+        npc.snapTo(spawnX, player.getY(), spawnZ, player.getYRot(), 0.0F);
         npc.addTag(NPC_TAG);
         npc.addTag(target ? TARGET_TAG : COMBAT_TAG);
         npc.setCustomName(Component.literal(target ? "WinTrain • Мишень" : "WinTrain • Боец"));
@@ -96,7 +96,7 @@ public final class WinTrainCommands {
 
     private static int clearNearby(CommandSourceStack source) throws CommandSyntaxException {
         ServerPlayer player = source.getPlayerOrException();
-        ServerLevel level = player.serverLevel();
+        ServerLevel level = player.level();
         AABB area = player.getBoundingBox().inflate(64.0);
         List<Husk> npcs = level.getEntitiesOfClass(Husk.class, area,
                 entity -> entity.getTags().contains(NPC_TAG));
