@@ -8,7 +8,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.client.KeyMapping.Category;
-import net.minecraft.client.KeyMapping;
 import com.mojang.blaze3d.platform.InputConstants;
 import org.lwjgl.glfw.GLFW;
 
@@ -39,9 +38,12 @@ public final class WinTrainClient implements ClientModInitializer {
 
     public static void setMode(Mode newMode) {
         mode = newMode;
-        Minecraft.getInstance().player.displayClientMessage(
-                Component.literal("WinTrain: " + (mode == Mode.COMBAT_BOT ? "Боевой NPC" : "Тренировочная мишень")),
-                true
-        );
+        Minecraft client = Minecraft.getInstance();
+        if (client.player != null) {
+            client.player.displayClientMessage(
+                    Component.literal("WinTrain: " + (mode == Mode.COMBAT_BOT ? "Боевой NPC" : "Тренировочная мишень")),
+                    true
+            );
+        }
     }
 }
