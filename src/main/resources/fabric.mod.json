@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "id": "wintrain",
+  "version": "${version}",
+  "name": "WinTrain",
+  "description": "A Minecraft training companion mod.",
+  "authors": ["diazz27kryt"],
+  "license": "MIT",
+  "environment": "*",
+  "entrypoints": { "main": ["ru.wintrain.WinTrain"] },
+  "depends": {
+    "fabricloader": ">=0.18.1",
+    "minecraft": "~1.21.11",
+    "java": ">=21",
+    "fabric-api": "*"
+  }
+}
