@@ -10,8 +10,9 @@ import net.minecraft.client.KeyMapping.Category;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.monster.Zombie;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import org.lwjgl.glfw.GLFW;
@@ -57,10 +58,6 @@ public final class WinTrainClient implements ClientModInitializer {
         }
     }
 
-    /**
-     * First prototype: spawn a no-AI vanilla zombie in the integrated singleplayer
-     * server. It stays in place but retains normal knockback when hit.
-     */
     private static void spawnStandingNpc(Minecraft client) {
         var integratedServer = client.getSingleplayerServer();
         if (integratedServer == null) {
@@ -76,12 +73,11 @@ public final class WinTrainClient implements ClientModInitializer {
 
             ServerLevel level = player.level();
 
-            // Keep only one WinTrain dummy near the player.
-            level.getEntitiesOfClass(Zombie.class, player.getBoundingBox().inflate(64),
-                    zombie -> zombie.getTags().contains(NPC_TAG))
+            level.getEntitiesOfClass(Mob.class, player.getBoundingBox().inflate(64),
+                    mob -> mob.getTags().contains(NPC_TAG))
                     .forEach(Entity::discard);
 
-            Zombie npc = EntityType.ZOMBIE.create(level);
+            Mob npc = EntityType.ZOMBIE.create(level, EntitySpawnReason.TRIGGERED);
             if (npc == null) return;
 
             var look = player.getLookAngle();
