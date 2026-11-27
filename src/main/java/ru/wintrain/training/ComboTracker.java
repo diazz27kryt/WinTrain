@@ -34,7 +34,7 @@ public final class ComboTracker {
             return;
         }
 
-        long tick = player.serverLevel().getGameTime();
+        long tick = player.level().getGameTime();
         PlayerStats stats = STATS.computeIfAbsent(player.getUUID(), ignored -> new PlayerStats());
         stats.recordHit(tick);
 
