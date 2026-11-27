@@ -7,8 +7,10 @@ import net.fabricmc.fabric.api.client.message.v1.ClientReceiveMessageEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
+import net.minecraft.world.entity.EntityType;
 import org.lwjgl.glfw.GLFW;
 
 public final class WinTrainClient implements ClientModInitializer {
@@ -22,6 +24,7 @@ public final class WinTrainClient implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
+        EntityRenderers.register(EntityType.HUSK, WinTrainHuskRenderer::new);
         KeyMapping.Category category = KeyMapping.Category.register(
                 Identifier.fromNamespaceAndPath("wintrain", "main")
         );
