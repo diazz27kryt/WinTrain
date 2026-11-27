@@ -13,7 +13,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.monster.Husk;
+import net.minecraft.world.entity.monster.zombie.Husk;
 import net.minecraft.world.phys.AABB;
 
 import java.util.List;
@@ -44,7 +44,7 @@ public final class WinTrainCommands {
 
     private static int spawn(CommandSourceStack source, boolean target) throws CommandSyntaxException {
         ServerPlayer player = source.getPlayerOrException();
-        ServerLevel level = player.serverLevel();
+        ServerLevel level = player.level();
 
         double yaw = Math.toRadians(player.getYRot());
         double spawnX = player.getX() - Math.sin(yaw) * 2.5;
